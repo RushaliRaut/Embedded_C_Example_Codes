@@ -1,0 +1,38 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include <stdint.h>
+
+int main()
+{
+    uint32_t Number;
+    uint8_t m,n;
+    uint16_t in_num;
+    uint32_t mask=0;
+    
+    printf("Enter a 32 bit number\n");
+    scanf("%x",&Number);
+    printf("Enter m value\n");
+    scanf("%hhu",&m);
+    printf("Enter n value\n");
+    scanf("%hhu",&n);
+    printf("Enter input number\n");
+    scanf("%hx",&in_num);
+    for(unsigned char i=n;i<=m;i++)
+    {
+        mask |=(1<<i);
+        printf("mask=%x\n",mask);
+    }
+    Number &=~ mask;
+    printf("Masked_Number=%x\n",Number);
+    Number |= in_num;
+    printf("Final_Value=%x\n",Number);
+
+    return 0;
+}
