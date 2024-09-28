@@ -1,0 +1,38 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+/**********************************************************************************************************************************************/
+
+
+/*****************Problem Statement:-Take 2 numbers suppose Num1=5 & Num2=3 then calculate the number of bits that different from each other*********/
+/********************If Num 1 is  5(b0101)and Num 2 is 3(b0011) then output should be 2 (i.e.2 bits are different from each other) *****************/
+#include <stdio.h>
+#include <stdint.h>
+
+int main()
+{
+    uint8_t Num1;
+    uint8_t Num2;
+    uint8_t count;
+    
+    printf("Enter 1 st Number");
+    scanf("%hhu",&Num1);
+    printf("Enter 2 nd Number");
+    scanf("%hhu",&Num2);
+    
+    for(char i=0;i<8;i++)
+    {
+        if((Num1^Num2)&((0x01)<<i))
+        count++;
+    }
+    printf("%hhu",count);
+    
+
+    return 0;
+}
+
+
