@@ -1,0 +1,121 @@
+
+/****************************Problem Statement:-Find if the number is divisible by 3 using state machine********************************************/
+
+/*********************************Assumption:- consider initial current state as STATE-0  ********************************************************/
+
+/****************************Current state=0 if remainder is 0 Current state=0 else Current state=1
+                             Current state=1 if remainder is 0 Current state=2 else Current state=1
+                             Current state=2 if remainder is 0 Current state=1 else Current state=2 ********************************************************/
+
+#include <stdio.h>
+#include <stdint.h>
+
+typedef enum
+{
+    STATE_0,
+    STATE_1,
+    STATE_2,
+}State;
+typedef enum
+{
+    REM_0,
+    REM_1,
+}Remainder;
+
+void Convert_Deciaml_TO_Binary(uint32_t num);
+void Find_if_num_Div_3(uint32_t binary_num);
+
+int main()
+{
+    uint32_t num;
+    while(1)
+    {
+        printf("Enter a number\n");
+        scanf("%d",&num);
+        Convert_Deciaml_TO_Binary(num);
+
+            Find_if_num_Div_3(num);
+ 
+    }
+
+    return 0;
+}
+void Convert_Deciaml_TO_Binary(uint32_t num)
+{
+    uint32_t bit;
+    for(char i=31;i>=0;i--)
+    {
+        bit=(num>>i)& 1;
+        printf("%d",bit);
+        
+    }
+    printf("\n");
+}
+
+void Find_if_num_Div_3(uint32_t binary_num)
+{
+    State Current_state=STATE_0;
+    Remainder rem;
+    
+    while(binary_num !=0)
+    {
+        rem=binary_num%2;
+        switch(Current_state)
+        {
+           case STATE_0:
+               
+            if(rem==REM_0)
+                Current_state=STATE_0;
+            else
+                Current_state=STATE_1;
+              
+           break;
+           
+           case STATE_1:
+               
+            if(rem==REM_0)
+                Current_state=STATE_2;
+            else
+                Current_state=STATE_0;
+           break;
+           
+           case STATE_2:
+           if(rem==REM_0)
+                Current_state=STATE_1;
+            else
+                Current_state=STATE_2;
+           break;
+        }
+     binary_num=binary_num/2;
+    }
+    if(Current_state==STATE_0)
+    {
+        printf("Number is divisible by 3\n");
+    }
+    else
+    {
+        printf("Number is not divisible by 3\n");
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+/////***************************************************Expected Output ******************************************************************************************/
+
+
+/*
+Enter a number
+13
+00000000000000000000000000001101
+Number is not divisible by 3
+Enter a number
+15
+00000000000000000000000000001111
+*/
